@@ -1,0 +1,33 @@
+# docker-compose.ymlフォーマットのバージョン指定
+version: '3'
+services:
+  # Railsコンテナ定義
+  web:
+    # Dockerfileを使用してイメージをビルド
+    build: .
+    # ポート3000が来たらrailsサーバーが応答
+    command: bundle exec rails s -p 3001 -b '0.0.0.0'
+    # ローカルのsrcをコンテナにマウント
+    volumes:
+      - .:/app
+    ports:
+      - 3001:3001
+    # dbコンテナが先に起動するよう設定
+    depends_on:
+      - mysql
+    tty: true
+    stdin_open: true
+  # MySQLコンテナ定義
+  mysql:
+    # mysqlを使用してコンテナ作成
+    image: mysql:5.7.28
+    volumes:
+      # データストアからマウント
+      - ./tmp/mysql:/var/lib/mysql
+    # コンテナ内の環境変数を定義
+    environment:
+      # mysqlのルートユーザーのパスワード設定
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    restart: always

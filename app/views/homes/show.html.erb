@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row new-content">
+        <h1>コンテンツ詳細</h1>
+        <button type="button" class="btn btn-outline-secondary"><a href="/homes/index">コンテンツ一覧</a></button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="user_name">名前</label><br>
+                <%= @user.name %>
+                </div>
+                <div class="form-group">
+                <label for="user_title">タイトル</label><br>
+                <%= @user.title %>
+                </div>
+                <div class="form-group">
+                <label for="user_body">本文</label><br>
+                <%= @user.body %>
+            </div>
+        </div>
+    </div>
+</div>
